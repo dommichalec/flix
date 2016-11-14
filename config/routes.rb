@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   # http://guides.rubyonrails.org/routing.html
 
   # verb "url" => "name_of_controller#name_of_action"
-  get "/movies" => "movies#index"
-  get "/movies/:id" => "movies#show"
+  root "movies#index"
+  resources :movies
 end

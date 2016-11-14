@@ -1,0 +1,14 @@
+<%= form_for(object) do |f| %>
+  <p><%= f.label :title %></p>
+  <p><%= f.text_field :title, autofocus: true %></p>
+  <p><%= f.label :released_on %></p>
+  <p><%= f.date_field :released_on %></p>
+  <p><%= f.label :rating %></p>
+  <p><%= f.text_field :rating, colspan: 3 %></p>
+  <p><%= f.label :description %></p>
+  <p><%= f.text_area :description %></p>
+  <p><%= f.label :total_gross %></p>
+  <p><%= f.number_field :total_gross %></p>
+  <%= f.submit %> |
+  <%= link_to("Cancel", movies_path) %>
+<% end %>

@@ -1,10 +1,12 @@
 <h1><%= pluralize(@flix.size, 'Flick', 'Flix') %><h1>
 <ul>
   <% @flix.each do |flick| %>
-    <li><%= flick.title %> (<%=flick.rating %>):
+    <li><%= link_to(flick.title, movie_path(flick.id)) %> (<%=flick.rating %>):
       <%= format_total_gross(flick) %></li>
     <p>Description: <%= truncate(flick.description, length: 40,
                                  separator: ' ') %></p>
     <p>Released on <%= flick.released_on.to_s(:default)%></p>
   <% end %>
 </ul>
+
+<%= link_to("Add new movie", new_movie_path) %>
