@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
 
   # gets every movie record in the db and sets them equal to @flix
   def index
-    @flix = Movie.all
+    @flix = Movie.released
   end
 
   # gets movie based on id value in URL params hash and sets it equal to @movie
@@ -49,6 +49,6 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :rating, :total_gross, :description,
-                                  :released_on)
+                          :released_on, :cast, :director, :duration_in_minutes)
   end
 end
