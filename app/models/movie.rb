@@ -2,7 +2,10 @@ class Movie < ApplicationRecord
 
   # validations
   validates :title, presence: true
+  validates :cast, presence: true
+  validates :director, presence: true
   validates :rating, length: { in: 1..5 }
+  validates :duration, numericality: { greater_than_or_equal: 0 }
   validates :total_gross, numericality: { greater_than_or_equal: 0 }
   validates :description, length: { in: 1..500 }
   # depends on the gem 'date_validator'
