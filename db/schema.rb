@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115003203) do
+ActiveRecord::Schema.define(version: 20161116014410) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161115003203) do
     t.string   "cast"
     t.string   "director"
     t.integer  "duration_in_minutes", default: 1
+    t.index ["director"], name: "index_movies_on_director"
   end
 
 end

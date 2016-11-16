@@ -12,6 +12,7 @@
   <%= render 'layouts/partials/header' %>
   <%= render 'layouts/partials/aside' %>
     <!-- yield just outputs the result of whatever action we run -->
+    <%= flash[:notice] if flash[:notice] %>
     <%= yield %>
   <%= render 'layouts/partials/footer' %>
   </body>
