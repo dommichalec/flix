@@ -21,8 +21,12 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
-    @movie.update(movie_params)
-    redirect_to movie_path(@movie)
+    if @movie.update(movie_params) # automatically returns true if validate
+      flash[:success] = "#{@movie.title} has been successfully updated!"
+      redirect_to movie_path(@movie)
+    else
+      render 'edit' # redisplays form
+    end
   end
 
   def new
@@ -31,12 +35,11 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    if @movie.valid?
-      @movie.save
+    if @movie.save # automatically runs @movie.valid?
       flash[:success] = "#{@movie.title} was successfully added!"
-      redirect_to movie_path(@movie)
+      redirect_to movies_path
     else
-      render 'new'
+      render 'new' # redisplays form
     end
   end
 

@@ -5,15 +5,14 @@ class Movie < ApplicationRecord
   validates :cast, presence: true
   validates :director, presence: true
   validates :rating, length: { in: 1..5 }
-  validates :duration, numericality: { greater_than_or_equal: 0 }
+  validates :duration_in_minutes, numericality: { greater_than_or_equal: 0 }
   validates :total_gross, numericality: { greater_than_or_equal: 0 }
   validates :description, length: { in: 1..500 }
   # depends on the gem 'date_validator'
   validates :released_on,
           date: { after: Proc.new { Time.now - 116.year },
                   before: Proc.new { Time.now + 5.year },
-                  message: 'Release date must be valid (between 1900
-                  and 2021) ' }
+                  message: 'date must be valid (between 1900 and 2021) ' }
 
   # class methods
 
@@ -25,7 +24,7 @@ class Movie < ApplicationRecord
 
   # instance methods
 
-  # defines whether a movie is a flop
+  # defines whether or not a movie is a flop
   def flop?
     self.total_gross <= 50000000
   end
