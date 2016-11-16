@@ -9,6 +9,10 @@
   </head>
 
   <body>
+  <%= render 'layouts/partials/header' %>
+  <%= render 'layouts/partials/aside' %>
+    <!-- yield just outputs the result of whatever action we run -->
     <%= yield %>
+  <%= render 'layouts/partials/footer' %>
   </body>
 </html>

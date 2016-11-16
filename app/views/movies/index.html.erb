@@ -1,4 +1,4 @@
-<h1><%= pluralize(@flix.size, 'Flick', 'Flix') %><h1>
+<h1><%= pluralize(@flix.size, 'Flick', 'Flix') %></h1>
 <ul>
   <% @flix.each do |flick| %>
     <li><%= link_to(flick.title, movie_path(flick.id)) %> (<%=flick.rating %>):
