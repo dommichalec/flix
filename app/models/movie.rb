@@ -8,7 +8,9 @@ class Movie < ApplicationRecord
   # depends on the gem 'date_validator'
   validates :released_on,
           date: { after: Proc.new { Time.now - 116.year },
-                  before: Proc.new { Time.now + 5.year } }
+                  before: Proc.new { Time.now + 5.year },
+                  message: 'Release date must be valid (between 1900
+                  and 2021) ' }
 
   # class methods
 
