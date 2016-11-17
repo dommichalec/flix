@@ -1,0 +1,14 @@
+<h1>New Registration for <%= @movie.title %></h1>
+
+<%= form_for([@movie, @registration]) do |f| %>
+  <p><%= f.label :first_name %></p>
+  <p><%= f.text_field :first_name, autofocus: true %></p>
+  <p><%= f.label :last_name %></p>
+  <p><%= f.text_field :last_name%></p>
+  <p><%= f.label :email %></p>
+  <p><%= f.text_field :email%></p>
+  <p><%= f.label :how_heard %></p>
+  <p><%= f.select :how_heard, Registration::HOW_HEARD_OPTIONS,
+         prompt: "Pick one" %></p>
+  <%= f.submit %> | <%= link_to("Cancel", movie_path(@movie)) %>
+<% end %>

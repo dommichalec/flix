@@ -1,6 +1,8 @@
 <h1><%= @movie.title %> (<%= @movie.rating %>)</h1>
 <p><%= @movie.description %></p>
 <p><%= pluralize(@movie.duration_in_minutes, 'minute') %></p>
+<p><%= link_to("Register for #{@movie.title}",
+              new_movie_registration_path(@movie)) %></p>
 <p><%= link_to("Registrations", movie_registrations_path(@movie)) %></p>
 <%= link_to("Edit #{@movie.title}", edit_movie_path) %> |
 <%= link_to("Remove #{@movie.title}", movie_path(@movie), method: :delete,
