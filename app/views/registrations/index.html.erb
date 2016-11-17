@@ -1,0 +1,5 @@
+<h1><%= pluralize(@registrations.size, "registration") %> for <%= @movie.title %></h1>
+<% @registrations.each do |registration| %>
+  <p><%= mail_to(registration.email, registration.full_name) %>
+  (<%= registration.how_heard%>)</p>
+<% end %>

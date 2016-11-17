@@ -1,0 +1,21 @@
+<%= form_for(object) do |f| %>
+<%= render 'shared/errors', object: @movie %>
+  <p><%= f.label :title %></p>
+  <p><%= f.text_field :title, autofocus: true %></p>
+  <p><%= f.label :released_on %></p>
+  <p><%= f.date_field :released_on %></p>
+  <p><%= f.label :rating %></p>
+  <p><%= f.text_field :rating %></p>
+  <p><%= f.label :description %></p>
+  <p><%= f.text_area :description %></p>
+  <p><%= f.label :cast %></p>
+  <p><%= f.text_field :cast %></p>
+  <p><%= f.label :director %></p>
+  <p><%= f.text_field :director %></p>
+  <p><%= f.label :duration_in_minutes %></p>
+  <p><%= f.number_field :duration_in_minutes %></p>
+  <p><%= f.label :total_gross %></p>
+  <p><%= f.number_field :total_gross %></p>
+  <%= f.submit %> |
+  <%= link_to("Cancel", movies_path) %>
+<% end %>
