@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def create
@@ -19,11 +19,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params) # automatically calls @user.save which calls @user.valid?
       flash[:notice] = "Boom! You've successfully updated your account!"
       redirect_to user_path(@user)
@@ -33,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @first_name = @user.first_name
     if @user.delete
       flash[:notice] = "Sorry to see you go, #{@first_name}!"
@@ -48,5 +45,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password,
                                  :password_confirmation)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
