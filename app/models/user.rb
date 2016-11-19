@@ -10,4 +10,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8, allow_blank: true }
   validates :email, format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
