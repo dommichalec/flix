@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password # attr_accessor :password, :password_confirmation
   # associations
+  has_many :registrations, dependent: :destroy # if user is destroyed it only
+  # makes sense to destroy the user's registrations as well.
 
   # constants
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

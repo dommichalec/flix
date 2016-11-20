@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       flash[:notice] = "Welcome back, #{user.first_name}!"
-      redirect_to user_path(user)
+      redirect_to(session[:intended_url] || user_path(user))
+      session[:intended_url] = nil
     else
       flash.now[:notice] = "Doh! That email/password combo is invalid!"
       render 'new'

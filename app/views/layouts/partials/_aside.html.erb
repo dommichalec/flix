@@ -1,5 +1,7 @@
 <aside style="background: #ecf0f1; float: right; width: 200px;">
-  <h4><%= link_to("Add new movie", new_movie_path) %></h4>
+  <% if current_user_admin? %>
+    <h4><%= link_to("Add new movie", new_movie_path) %></h4>
+  <% end %>
   <h4><%= link_to("All Movies", root_path) %></h4>
   <% if current_user %>
   <h4>

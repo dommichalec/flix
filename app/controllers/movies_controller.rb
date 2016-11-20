@@ -4,6 +4,9 @@
 # rails g controller movies
 class MoviesController < ApplicationController
 
+  before_action :require_signin, except: [:index, :show]
+  before_action :require_admin, except: [:index, :show]
+
   # gets every movie record in the db and sets them equal to @flix
   def index
     @flix = Movie.released
@@ -54,5 +57,12 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :rating, :total_gross, :description,
                           :released_on, :cast, :director, :duration_in_minutes)
+  end
+
+  def require_admin
+    unless current_user_admin?
+      flash[:notice] = "Sorry, you do not have access to that action."
+      redirect_to root_path
+    end
   end
 end

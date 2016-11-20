@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
+  # callback order is critical, runs top to bottom
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_signin, except: [:new, :create]
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
+
   def new
     @user = User.new
   end
 
   def show
+    @registrations = @user.registrations
   end
 
   def create

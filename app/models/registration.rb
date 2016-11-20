@@ -1,6 +1,7 @@
 class Registration < ApplicationRecord
   # associations
   belongs_to :movie # child to parent Movie
+  belongs_to :user
 
   # constants
   HOW_HEARD_OPTIONS = [
@@ -13,12 +14,10 @@ class Registration < ApplicationRecord
   ]
 
   # validations
-  validates :first_name, :last_name, presence: true
-  validates :email, format: { with: /(\S+)@(\S+)/ }
   validates :how_heard, inclusion: { in: HOW_HEARD_OPTIONS }
 
   # instance methods
-  
+
   # displays full name of the registrar
   def full_name
     "#{first_name} #{last_name}"

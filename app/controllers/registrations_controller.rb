@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :set_movie, only: [:index, :new, :create]
+  before_action :require_signin
 
   def index
     @registrations = @movie.registrations
@@ -11,6 +12,7 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = @movie.registrations.new(registration_params)
+    @registration.user = current_user
     if @registration.save
       flash[:notice] = "Awesome! You're registered for #{@movie.title}!"
       redirect_to movie_path(@movie)
@@ -22,8 +24,7 @@ class RegistrationsController < ApplicationController
   private
 
   def registration_params
-    params.require(:registration).permit(:first_name, :last_name,
-                                         :email, :how_heard)
+    params.require(:registration).permit(:how_heard)
   end
 
   def set_movie

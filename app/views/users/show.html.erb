@@ -1,5 +1,11 @@
 <h1><%= @user.full_name %></h1>
+<h3>Movie Registrations</h3>
+<% @registrations.each do |registration| %>
+  <ul style="none"><%= link_to(registration.movie.title, registration.movie) %></ul>
+<% end %>
 
+<% if current_user?(@user) %>
 <%= link_to("Edit your account", edit_user_path(@user)) %>
 <%= link_to("Delete your account", user_path(@user), method: :delete,
           data: { confirm: "Are you sure you want to delete your account?" }) %>
+<% end %>

@@ -4,7 +4,9 @@
 <p><%= link_to("Register for #{@movie.title}",
               new_movie_registration_path(@movie)) %></p>
 <p><%= link_to("Registrations", movie_registrations_path(@movie)) %></p>
+<% if current_user_admin? %>
 <%= link_to("Edit #{@movie.title}", edit_movie_path) %> |
 <%= link_to("Remove #{@movie.title}", movie_path(@movie), method: :delete,
             data: { confirm: "Are you sure you want to remove #{@movie.title}?"})
             %>
+<% end %>
