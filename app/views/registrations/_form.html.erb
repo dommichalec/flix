@@ -1,0 +1,27 @@
+<%= render 'shared/errors', object: @review %>
+<%= form_for([@movie,@registration]) do |f| %>
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </li>
+      <li class="required">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </li>
+      <li class="required">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </li>
+      <li class="required">
+        <%= f.label :how_heard %>
+        <%= f.select_field :how_heard, Registration::HOW_HEARD_OPTIONS %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit %>
+      <%= link_to "Cancel", movie_path(@movie), class: 'button' %>
+    </p>
+  </fieldset>
+<% end %>

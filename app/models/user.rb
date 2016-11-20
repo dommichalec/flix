@@ -11,6 +11,13 @@ class User < ApplicationRecord
   validates :email, format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
 
+  # class methods
+  def self.confirm(email, password)
+    user = User.find_by(email: email)
+    user && user.authenticate(password)
+  end
+
+  # instance methods
   def full_name
     "#{first_name} #{last_name}"
   end

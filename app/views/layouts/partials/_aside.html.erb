@@ -1,4 +1,10 @@
 <aside style="background: #ecf0f1; float: right; width: 200px;">
   <h4><%= link_to("Add new movie", new_movie_path) %></h4>
   <h4><%= link_to("All Movies", root_path) %></h4>
+  <% if current_user %>
+  <h4>
+    <%= link_to current_user.full_name, user_path(current_user) %>
+    <%= link_to 'Sign Out', session_path, method: :delete %>
+  </h4>
+  <% end %>
 </aside>

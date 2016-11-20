@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_signin, except: [:new, :create]
   def new
     @user = User.new
   end
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "Welcome to Flix, #{@user.first_name}!"
       redirect_to user_path(@user)
     else
@@ -32,7 +33,8 @@ class UsersController < ApplicationController
 
   def destroy
     @first_name = @user.first_name
-    if @user.delete
+    if @user.destroy
+      session[:user_id] = nil
       flash[:notice] = "Sorry to see you go, #{@first_name}!"
       redirect_to root_path
     else
