@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # associations
   has_many :registrations, dependent: :destroy # if user is destroyed it only
   # makes sense to destroy the user's registrations as well.
-
+  has_many :favorites, dependent: :destroy
+  has_many :movies, through: :favorites
   # constants
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
