@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @registrations = @user.registrations
+    @favorite_movies = @user.favorite_movies
   end
 
   def create

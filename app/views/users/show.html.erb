@@ -1,4 +1,10 @@
 <h1><%= @user.full_name %></h1>
+<% if @favorite_movies.any? %>
+  <h3>Favorite Movies</h3>
+  <% @favorite_movies.each do |fav| %>
+    <ul><%= link_to fav.title, movie_path(fav) %></ul>
+  <% end %>
+<% end %>
 <h3>Movie Registrations</h3>
 <% @registrations.each do |registration| %>
   <ul style="none"><%= link_to(registration.movie.title, registration.movie) %></ul>

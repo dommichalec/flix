@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
   # gets movie based on id value in URL params hash and sets it equal to @movie
   def show
     @movie = Movie.find(params[:id])
+    @fans = @movie.fans
   end
 
   # gets movie based on id value in URL params hash for editing purposes

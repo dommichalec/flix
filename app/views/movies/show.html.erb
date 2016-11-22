@@ -1,6 +1,12 @@
 <h1><%= @movie.title %> (<%= @movie.rating %>)</h1>
 <p><%= @movie.description %></p>
 <p><%= pluralize(@movie.duration_in_minutes, 'minute') %></p>
+<% if @fans.any? %>
+<h2>Fans of <%= @movie.title %></h2>
+  <% @fans.each do |fan| %>
+    <p><%= link_to(fan.full_name, user_path(fan)) %></p>
+  <% end %>
+<% end %>
 <p><%= link_to("Register for #{@movie.title}",
               new_movie_registration_path(@movie)) %></p>
 <p><%= link_to("Registrations", movie_registrations_path(@movie)) %></p>

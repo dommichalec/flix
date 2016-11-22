@@ -3,7 +3,8 @@ class Movie < ApplicationRecord
   has_many :registrations, dependent: :destroy # parent to child Registration
   # and destroys all registrations when it is destroyed itself from the db.
   has_many :favorites, dependent: :destroy
-  has_many :users, through: :favorites
+  # same as has_many :users, through: :favorites
+  has_many :fans, through: :favorites, source: :user
   # validations
   validates :title, presence: true
   validates :cast, presence: true
