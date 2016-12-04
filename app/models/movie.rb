@@ -19,13 +19,23 @@ class Movie < ApplicationRecord
                   before: Proc.new { Time.now + 5.year },
                   message: 'date must be valid (between 1900 and 2021) ' }
 
+  # custom query scopes
+  scope :released, lambda { where("released_on <= ?", Time.now).order("released_on desc") }
+  scope :upcoming, lambda { where("released_on >= ?", Time.now) }
   # class methods
 
   # selects movies that've already been released and orders them
   # in descending release date (stating with most recently released)
-  def self.released
-    where("released_on <= ?", Time.now).order("released_on desc")
-  end
+
+  # def self.released
+    # where("released_on <= ?", Time.now).order("released_on desc")
+  # end
+
+  # selects movies that haven't come out yet
+  
+  # def self.upcoming
+    # where("released_on >=", Time.now)
+  # end
 
   # instance methods
 
