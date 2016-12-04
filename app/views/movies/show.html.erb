@@ -1,6 +1,13 @@
 <h1><%= @movie.title %> (<%= @movie.rating %>)</h1>
 <p><%= @movie.description %></p>
 <p><%= pluralize(@movie.duration_in_minutes, 'minute') %></p>
+
+<% if current_user && @current_favorite %>
+  <%= button_to "unfavorite this movie", movie_favorite_path(@movie, @current_favorite), method: :delete %>
+<% else %>
+  <%= button_to "favorite this movie", movie_favorites_path(@movie), method: :post %>
+<% end %>
+
 <% if @fans.any? %>
 <h2>Fans of <%= @movie.title %></h2>
   <% @fans.each do |fan| %>
