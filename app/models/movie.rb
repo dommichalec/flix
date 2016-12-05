@@ -19,9 +19,17 @@ class Movie < ApplicationRecord
                   before: Proc.new { Time.now + 5.year },
                   message: 'date must be valid (between 1900 and 2021) ' }
 
-  # custom query scopes
+  # use custom query scopes to dynamically define class methods
   scope :released, lambda { where("released_on <= ?", Time.now).order("released_on desc") }
-  scope :upcoming, lambda { where("released_on >= ?", Time.now) }
+  scope :upcoming, lambda { where("released_on >= ?", Time.now).order("released_on asc")}
+  scope :rated, ->(rating) { released.where(rating: rating) }
+  scope :recent, ->(max=5) { released.limit(max) }
+  scope :hits, lambda { where('total_gross >= 300000000').order(total_gross: :desc) }
+  scope :flops, lambda { where('total_gross <= 50000000').order(total_gross: :asc) }
+  scope :released_hits, lambda { released.where('total_gross >= 300000000').order(total_gross: :desc) }
+  scope :released_flops, lambda { released.where('total_gross <= 300000000').order(total_gross: :desc)}
+  # scope :rated, lambda(rating) { released.where(rating: rating) }
+
   # class methods
 
   # selects movies that've already been released and orders them
@@ -32,15 +40,23 @@ class Movie < ApplicationRecord
   # end
 
   # selects movies that haven't come out yet
-  
+
   # def self.upcoming
     # where("released_on >=", Time.now)
+  # end
+
+  # def self.hits
+    # where('total_gross >= 300000000').order(total_gross: :desc)
+  # end
+
+  # def self.flops
+    # where('total_gross < 50000000').order(total_gross: :asc)
   # end
 
   # instance methods
 
   # defines whether or not a movie is a flop
   def flop?
-    self.total_gross <= 50000000
+    total_gross <= 50000000
   end
 end

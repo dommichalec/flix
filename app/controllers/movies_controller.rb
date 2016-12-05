@@ -9,14 +9,23 @@ class MoviesController < ApplicationController
 
   # gets every movie record in the db and sets them equal to @flix
   def index
-    @flix = Movie.released
+    case params[:scope]
+    when 'hits'
+      @flix = Movie.hits
+    when 'flops'
+      @flix = Movie.flops
+    when 'upcoming'
+      @flix = Movie.upcoming
+    else
+      @flix = Movie.released
+    end
   end
 
   # gets movie based on id value in URL params hash and sets it equal to @movie
   def show
     @movie = Movie.find(params[:id])
     @fans = @movie.fans
-    
+
     if current_user
       @current_favorite = current_user.favorites.find_by(movie_id: @movie.id)
     end

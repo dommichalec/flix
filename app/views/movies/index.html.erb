@@ -1,4 +1,7 @@
-<h1><%= pluralize(@flix.size, 'Flick', 'Flix') %></h1>
+<h1><%= pluralize(@flix.size, 'Flick', plural: 'Flix') %></h1>
+<%= link_to 'Hits', filtered_movies_path(:hits) %>
+<%= link_to 'Flops', filtered_movies_path(:flops) %>
+<%= link_to 'Upcoming', filtered_movies_path(:upcoming) %>
 <ul>
   <% @flix.each do |flick| %>
     <li><%= link_to(flick.title, movie_path(flick.id)) %> (<%=flick.rating %>):

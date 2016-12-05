@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def index
+    @users = User.not_admins
+  end
+  
   def show
     @registrations = @user.registrations
     @favorite_movies = @user.favorite_movies

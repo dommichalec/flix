@@ -15,6 +15,11 @@ class User < ApplicationRecord
   validates :email, format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
 
+  # use custom query scopes to dynamically define class methods
+  scope :by_last_name, -> { order(:last_name) }
+  scope :by_updated_on, lambda { order(:updated_at)}
+  scope :not_admins, -> { by_last_name.where(admin: false) }
+
   # class methods
   def self.confirm(email, password)
     user = User.find_by(email: email)

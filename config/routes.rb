@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "signin" => "sessions#new"
   resource :session # singular resource
   get "signup" => "users#new"
+  get "movies/m/:scope" => "movies#index", as: :filtered_movies
   resources :users
   resources :movies do
     resources :favorites

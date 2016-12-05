@@ -16,6 +16,9 @@ class Registration < ApplicationRecord
   # validations
   validates :how_heard, inclusion: { in: HOW_HEARD_OPTIONS }
 
+  # use custom query scopes to dynamically define class methods
+  scope :past_n_days, ->(number_of) { where('created_at >= ?' , number_of.days.ago) }
+
   # instance methods
 
   # displays full name of the registrar
