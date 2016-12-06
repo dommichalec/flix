@@ -1,4 +1,7 @@
 class Movie < ApplicationRecord
+  # callbacks
+  before_validation :generate_slug
+
   # associations
   has_many :registrations, dependent: :destroy # parent to child Registration
   # and destroys all registrations when it is destroyed itself from the db.
@@ -6,7 +9,8 @@ class Movie < ApplicationRecord
   # same as has_many :users, through: :favorites
   has_many :fans, through: :favorites, source: :user
   # validations
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :slug, presence: true, uniqueness: true
   validates :cast, presence: true
   validates :director, presence: true
   validates :rating, length: { in: 1..5 }
@@ -58,5 +62,15 @@ class Movie < ApplicationRecord
   # defines whether or not a movie is a flop
   def flop?
     total_gross <= 50000000
+  end
+
+  # overriding the to_param inherited from ApplicationRecord for vanity URLs
+  def to_param
+    slug
+  end
+
+  # assigns the parameterized version of the title to the slug attribute
+  def generate_slug
+    self.slug ||= title.parameterize if title
   end
 end

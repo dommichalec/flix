@@ -4,7 +4,7 @@
 <%= link_to 'Upcoming', filtered_movies_path(:upcoming) %>
 <ul>
   <% @flix.each do |flick| %>
-    <li><%= link_to(flick.title, movie_path(flick.id)) %> (<%=flick.rating %>):
+    <li><%= link_to(flick.title, movie_path(flick)) %> (<%=flick.rating %>):
       <%= format_total_gross(flick) %></li>
     <p>Description: <%= truncate(flick.description, length: 40,
                                  separator: ' ') %></p>

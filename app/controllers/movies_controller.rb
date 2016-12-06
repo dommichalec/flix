@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
 
   # gets movie based on id value in URL params hash and sets it equal to @movie
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
     @fans = @movie.fans
 
     if current_user
@@ -33,11 +33,11 @@ class MoviesController < ApplicationController
 
   # gets movie based on id value in URL params hash for editing purposes
   def edit
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
   end
 
   def update
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
     if @movie.update(movie_params) # automatically returns true if validate
       flash[:notice] = "#{@movie.title} has been successfully updated!"
       redirect_to movie_path(@movie)
@@ -61,7 +61,7 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
     @movie.delete
     redirect_to movies_path
   end
